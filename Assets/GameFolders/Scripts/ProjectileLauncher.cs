@@ -10,7 +10,7 @@ public class ProjectileLauncher : MonoBehaviour
 
         SpriteRenderer _renderer;
         Vector3 dragStartPos;
-        public bool isPressed = true;
+        public bool isPressed;
 
 
 
@@ -24,17 +24,15 @@ public class ProjectileLauncher : MonoBehaviour
         }
         private void Update()
 
+
         {
-        if (!isPressed)
+        if (isPressed)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 DragStart();
             }
-        }
-        else
-        {
-            if (Input.GetMouseButton(0))
+            else if (Input.GetMouseButton(0))
             {
                 Dragging();
             }
@@ -42,11 +40,10 @@ public class ProjectileLauncher : MonoBehaviour
             {
                 DragRelease();
                 isPressed = false;
-
             }
         }
 
-        }
+    }
 
         private void DragStart()
         {
@@ -61,7 +58,7 @@ public class ProjectileLauncher : MonoBehaviour
             Vector3 draggingPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             draggingPos.z = 0f;
             lr.positionCount = 2;
-            lr.SetPosition(1, draggingPos);
+            lr.SetPosition(1, draggingPos); 
         }
 
         private void DragRelease()

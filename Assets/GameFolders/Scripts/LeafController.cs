@@ -12,12 +12,14 @@ public class LeafController : MonoBehaviour
 
 
     bool _spawnedLeaf;
+    bool _leafColliderControl;
 
     ProjectileLauncher _frogController;
 
     void Start()
     {
         _spawnedLeaf = false;
+        _leafColliderControl = true;
 
     }
 
@@ -31,8 +33,9 @@ public class LeafController : MonoBehaviour
     {
         ProjectileLauncher frogController = collision.collider.GetComponent<ProjectileLauncher>();
 
-        if (frogController != null)
+        if (frogController != null && _leafColliderControl)
         {
+            _leafColliderControl = false;
             GameManager.Instance.IncreaseScore(1);
             frogController.isPressed = true;
         }
