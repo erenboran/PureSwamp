@@ -7,6 +7,18 @@ public class GameManager : SingletonMonoBeheviorObject<GameManager>
     private int score;
     public Text ScoreText;
 
+
+    public void TestMethod()
+    {
+        Debug.Log("Test Method Calisti");
+    }
+
+    public void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+
     public int Score
     {
         get { return score; }
