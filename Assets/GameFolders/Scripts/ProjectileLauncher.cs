@@ -6,6 +6,9 @@ public class ProjectileLauncher : MonoBehaviour
     [Header("***Compenents***")]
 
     [SerializeField]
+    Animator frogAnimator;
+
+    [SerializeField]
     Rigidbody2D frogRigidbody2D;
     [SerializeField]
     Transform frogRotation;
@@ -84,6 +87,10 @@ public class ProjectileLauncher : MonoBehaviour
 
             mouseStartPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+            // StartingJumpAnimation();
+
+             frogAnimator.SetBool("isGrounded", false);
+
 
         }
 
@@ -115,7 +122,19 @@ public class ProjectileLauncher : MonoBehaviour
                 points[i].transform.position = pointSpawnPoint.position;
             }
 
-            Jump();
+            if (jumpSpeed > 0)
+            {
+                Jump();
+
+                frogAnimator.SetBool("isFlying", true);
+            }
+
+            else
+            {
+                frogAnimator.SetBool("isStartJump", false);
+
+            }
+
         }
 
 
@@ -126,13 +145,14 @@ public class ProjectileLauncher : MonoBehaviour
         if (xDistance > 0)
         {
             pointParent.gameObject.SetActive(false);
+
             jumpSpeed = 0;
+      }
 
-
-        }
         else
         {
             pointParent.gameObject.SetActive(true);
+            
             jumpSpeed = minJumpForce - xDistance * xDistanceMultiplier;
         }
 
@@ -166,7 +186,42 @@ public class ProjectileLauncher : MonoBehaviour
         return position;
     }
 
-    
+    void StartingJumpAnimation()
+    {
+        frogAnimator.SetBool("isStartJump", true);
+        frogAnimator.SetBool("isGrounded", false);
+    }
+
+    void GroundAnimation()
+    {
+        frogAnimator.SetBool("isFlying", false);
+        frogAnimator.SetBool("isGrounded", true);
+        frogAnimator.SetBool("isStartJump", false);
+
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+
+
+        if (other.gameObject.CompareTag("Leaf"))
+        {
+            GroundAnimation();
+            GameEvents.Instance.OnEnteredLeaf?.Invoke();
+            GameEvents.Instance.OnScoreChanged?.Invoke(1);
+        }
+
+        else if (other.gameObject.CompareTag("Bowl"))
+        {
+            GroundAnimation();
+            GameEvents.Instance.OnScoreChanged?.Invoke(5);
+            GameEvents.Instance.OnEnteredLeaf?.Invoke();
+        }
+
+    }
+
+
 
 
 }

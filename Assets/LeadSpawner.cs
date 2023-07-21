@@ -5,13 +5,37 @@ using UnityEngine;
 public class LeadSpawner : MonoBehaviour
 {
     [SerializeField]
-    GameObject _leadPrefab;
+    GameObject _leafPrefab,_bowlOfFlowersPrefab;
+
+    [SerializeField]
+    int leafRandomRatio =4, bowlOfFlowersRandomRatio = 1;
+
+    [SerializeField]
+    bool randomY;
+
+    [SerializeField]
+    Transform spawnPointLeft, spawnPointRight;
+
+    float startY;
 
     Camera _mainCamera;
 
+    private void OnEnable()
+    {
+        GameEvents.Instance.OnEnteredLeaf += Spawn;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.Instance.OnEnteredLeaf -= Spawn;
+    }
+
+
     void Start()
     {
+        startY = spawnPointLeft.position.y;
         _mainCamera = Camera.main;
+
     }
 
     private void Update()
@@ -22,31 +46,39 @@ public class LeadSpawner : MonoBehaviour
         }
     }
 
+    void Spawn()
+    {
+         int randomPrefab = Random.Range(0, leafRandomRatio + bowlOfFlowersRandomRatio);
+
+        if (randomPrefab < leafRandomRatio)
+        {
+            SpawnLeaf();
+        }
+        else
+        {
+            SpawnBowlOfFlowersPrefab();
+        }
+    }
+
+
+     void SpawnBowlOfFlowersPrefab()
+    {
+      
+
+        Vector3 spawnPosition = new Vector3(Random.Range(spawnPointLeft.position.x, spawnPointRight.position.x), startY, 0f);
+
+        GameObject newLeaf = Instantiate(_bowlOfFlowersPrefab, spawnPosition, Quaternion.identity);
+
+
+    }
+
 
     void SpawnLeaf()
     {
-        Vector3 bottomLeft = _mainCamera.ViewportToWorldPoint(new Vector3(0, 0, _mainCamera.nearClipPlane));
-        Vector3 bottomRight = _mainCamera.ViewportToWorldPoint(new Vector3(1, 0, _mainCamera.nearClipPlane));
-        Vector3 middleTop = _mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 1, _mainCamera.nearClipPlane));
+        
+        Vector3 spawnPosition = new Vector3(Random.Range(spawnPointLeft.position.x, spawnPointRight.position.x), startY, 0f);
 
-        bottomLeft = new Vector3(bottomLeft.x + transform.position.x, bottomLeft.y, 0f);
-
-            Debug.Log(bottomLeft);
-
-        float spawnDistanceY = Random.Range(4.5f, middleTop.y);
-        float spawnDistanceX = Random.Range(bottomLeft.x, bottomRight.x);
-
-        Vector3 spawnPosition = new Vector3(spawnDistanceX, spawnDistanceY, 0f);
-
-        GameObject newLeaf = Instantiate(_leadPrefab, spawnPosition, Quaternion.identity);
-
-
-
-
-
-
-
-
+        GameObject newLeaf = Instantiate(_leafPrefab, spawnPosition, Quaternion.identity);
 
 
     }

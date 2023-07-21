@@ -8,22 +8,22 @@ public class GameManager : SingletonMonoBeheviorObject<GameManager>
     public Text ScoreText;
 
 
-    public void TestMethod()
-    {
-        Debug.Log("Test Method Calisti");
-    }
-
-    public void RestartGame()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    }
-
-
     public int Score
     {
         get { return score; }
         set { score = value; }
     }
+
+    private void OnEnable()
+    {
+        GameEvents.Instance.OnScoreChanged += IncreaseScore;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.Instance.OnScoreChanged -= IncreaseScore;
+    }
+
 
     void Awake()
     {
@@ -43,7 +43,7 @@ public class GameManager : SingletonMonoBeheviorObject<GameManager>
     {
         Time.timeScale = 0;
     }
-    // Update is called once per frame
+
 
     public void IncreaseScore(int amount)
     {
