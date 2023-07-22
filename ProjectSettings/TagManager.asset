@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Leaf
   - Bowl
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,10 @@ public class GameEvents : MonoBehaviour
 
     public delegate void OnScoreChangedDelegate(int score);
 
+    public delegate void OnGameEndedDelegate();
+
+
+    public OnGameEndedDelegate OnGameEnded;
     public OnEnteredLeafDelegate OnEnteredLeaf;
 
     public OnScoreChangedDelegate OnScoreChanged;
