@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FrogController : MonoBehaviour
+public class FrogManager : MonoBehaviour
 {
 
     [Header("***Compenents***")]

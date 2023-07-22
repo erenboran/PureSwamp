@@ -763,10 +763,10 @@ GameObject:
   m_Component:
   - component: {fileID: 930327301}
   - component: {fileID: 930327299}
-  - component: {fileID: 930327305}
   - component: {fileID: 930327303}
   - component: {fileID: 930327300}
   - component: {fileID: 930327302}
+  - component: {fileID: 930327304}
   m_Layer: 0
   m_Name: Frog
   m_TagString: Player
@@ -909,7 +909,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &930327305
+--- !u!114 &930327304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
