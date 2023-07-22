@@ -70,6 +70,11 @@ public class FrogManager : MonoBehaviour
 
     }
 
+    void StartJump()
+    {
+
+    }
+
 
     private void Update()
     {
@@ -90,6 +95,7 @@ public class FrogManager : MonoBehaviour
 
                 frogAnimator.SetBool("isGrounded", false);
             }
+
             else if (touch.phase == TouchPhase.Moved)
             {
                 for (int i = 0; i < numberOfPoints; i++)
@@ -127,29 +133,90 @@ public class FrogManager : MonoBehaviour
                 }
             }
         }
-
-
-    }
-
-    void ChangeJumpForce(float xDistance)
-    {
-        if (xDistance > 0)
-        {
-            pointParent.gameObject.SetActive(false);
-
-            jumpSpeed = 0;
-        }
-
         else
         {
-            pointParent.gameObject.SetActive(true);
+            if (Input.GetMouseButtonDown(0))
+            {
 
-            jumpSpeed = minJumpForce - xDistance * xDistanceMultiplier;
+
+                pointParent.gameObject.SetActive(true);
+
+                mouseStartPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                frogAnimator.SetBool("isGrounded", false);
+
+
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                for (int i = 0; i < numberOfPoints; i++)
+                {
+                    points[i].transform.position = PointPosition(i * spaceBetweenPoints);
+                }
+
+                Vector2 mouseEndPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                float xDistance = mouseEndPoint.x - mouseStartPoint.x;
+                float yDistance = mouseEndPoint.y - mouseStartPoint.y;
+
+                ChangeJumpForce(xDistance);
+
+                LookMouse(yDistance);
+
+
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+
+
+
+                pointParent.gameObject.SetActive(false);
+
+                for (int i = 0; i < numberOfPoints; i++)
+                {
+                    points[i].transform.position = pointSpawnPoint.position;
+                }
+
+                if (jumpSpeed > 0)
+                {
+                    Jump();
+
+                    frogAnimator.SetBool("isFlying", true);
+                }
+
+                else
+                {
+                    frogAnimator.SetBool("isStartJump", false);
+
+                }
+
+            }
+
+
         }
 
+        void ChangeJumpForce(float xDistance)
+        {
+            if (xDistance > 0)
+            {
+                pointParent.gameObject.SetActive(false);
+
+                jumpSpeed = 0;
+            }
+
+            else
+            {
+                pointParent.gameObject.SetActive(true);
+
+                jumpSpeed = minJumpForce - xDistance * xDistanceMultiplier;
+            }
 
 
 
+
+        }
     }
 
     void LookMouse(float yDistance)
