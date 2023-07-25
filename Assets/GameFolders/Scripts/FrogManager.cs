@@ -258,11 +258,17 @@ public class FrogManager : MonoBehaviour
 
     }
 
+    public void EndScene()
+    {
+        GameEvents.Instance.OnGameEnded?.Invoke();
+
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Ground"))
         {
-            GameEvents.Instance.OnGameEnded?.Invoke();
+            EndScene();
 
         }
     }
