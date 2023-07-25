@@ -52,11 +52,13 @@ public class FrogManager : MonoBehaviour
 
     bool canJump = true;
 
+    [SerializeField]
+    GameObject lastLeaf;
+
+
 
     private void Start()
     {
-
-
         frogStartRotation = frogRotation.rotation.eulerAngles;
 
         points = new GameObject[numberOfPoints];
@@ -70,10 +72,6 @@ public class FrogManager : MonoBehaviour
 
     }
 
-    void StartJump()
-    {
-
-    }
 
 
     private void Update()
@@ -276,21 +274,31 @@ public class FrogManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        GroundAnimation();
+
+
+
         canJump = true;
 
+        if (lastLeaf == other.gameObject)
+        {
+            return;
+        }
+
+        lastLeaf = other.gameObject;
+
+        GameEvents.Instance.OnEnteredLeaf?.Invoke();
 
         if (other.gameObject.CompareTag("Leaf"))
         {
-            GroundAnimation();
-            GameEvents.Instance.OnEnteredLeaf?.Invoke();
             GameEvents.Instance.OnScoreChanged?.Invoke(1);
         }
 
         else if (other.gameObject.CompareTag("Bowl"))
         {
-            GroundAnimation();
+
             GameEvents.Instance.OnScoreChanged?.Invoke(5);
-            GameEvents.Instance.OnEnteredLeaf?.Invoke();
+
         }
 
     }
