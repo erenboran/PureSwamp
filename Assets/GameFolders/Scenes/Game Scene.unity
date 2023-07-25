@@ -395,9 +395,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 452382567}
-        m_MethodName: 
-        m_Mode: 6
+      - m_Target: {fileID: 930327304}
+        m_MethodName: EndScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -492,7 +492,6 @@ MonoBehaviour:
   gameOverScoreText: {fileID: 8783850056318827294}
   gameOverPanel: {fileID: 3155544575685605143}
   restartButton: {fileID: 6495144830699832966}
-  mainMenuButton: {fileID: 332856752}
   mainSceneName: Main Menu Scene
 --- !u!114 &452382570
 MonoBehaviour:
@@ -813,7 +812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &740418831
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1391,8 +1390,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 452382569}
-        m_MethodName: ResumeGame
+      - m_Target: {fileID: 930327304}
+        m_MethodName: EndScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
