@@ -1471,7 +1471,7 @@ MonoBehaviour:
   soundOnSprite: {fileID: 21300000, guid: 668ca1d6d7176ba4783c981884b1a3e9, type: 3}
   soundOffSprite: {fileID: 21300000, guid: 3593176518b0c8245a4e1500a7bbce0a, type: 3}
   vibrationOnSprite: {fileID: 21300000, guid: 2944fed1e824a394cabe649f1c3facdf, type: 3}
-  vibrationOffSprite: {fileID: 21300000, guid: ca0b111851139204e92de22f01f2575f, type: 3}
+  vibrationOffSprite: {fileID: 21300000, guid: 4a594cc7c0b94f7488836fa5dc113d65, type: 3}
 --- !u!4 &2069640929
 Transform:
   m_ObjectHideFlags: 0

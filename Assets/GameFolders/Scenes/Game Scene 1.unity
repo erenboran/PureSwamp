@@ -918,22 +918,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 930327298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de6616884250394c8d67ac81965d634, type: 3}
+  m_Script: {fileID: 11500000, guid: 770cf8716cf89354cb06e9bde64ce905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frogAnimator: {fileID: 930327299}
-  frogRigidbody2D: {fileID: 930327303}
-  frogRotation: {fileID: 783332853}
-  pointPrefab: {fileID: 2631417805130828506, guid: 41724af14d536984fafabbf2342c3e9f,
-    type: 3}
-  pointParent: {fileID: 2032906006}
-  pointSpawnPoint: {fileID: 724854980}
+  frogAnimator: {fileID: 0}
+  frogRigidbody2D: {fileID: 0}
+  frogRotation: {fileID: 0}
+  pointPrefab: {fileID: 0}
+  pointParent: {fileID: 0}
+  points: []
+  pointSpawnPoint: {fileID: 0}
   minJumpForce: 4
   minRotation: 25
-  xDistanceMultiplier: 1.5
-  yDistanceMultiplier: 4
-  numberOfPoints: 10
-  spaceBetweenPoints: 0.05
+  xDistanceMultiplier: 1
+  yDistanceMultiplier: 1
+  jumpSpeed: 0
+  numberOfPoints: 0
+  spaceBetweenPoints: 0
+  direction: {x: 0, y: 0}
+  mouseStartPoint: {x: 0, y: 0}
+  frogStartRotation: {x: 0, y: 0}
+  canJump: 1
 --- !u!1 &963088390
 GameObject:
   m_ObjectHideFlags: 0

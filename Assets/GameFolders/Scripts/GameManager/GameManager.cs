@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     Button restartButton;
+    [SerializeField]
+    Button mainMenuButton;
 
     [SerializeField]
     string mainSceneName;
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         restartButton.onClick.AddListener(RestartGame);
+        mainMenuButton.onClick.AddListener(RestartGame);
     }
 
 
@@ -68,6 +71,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void ResumeGame()
+    {
+
+        Time.timeScale = 1;
+
+    }
     public void StopGame()
     {
         Time.timeScale = 0;
